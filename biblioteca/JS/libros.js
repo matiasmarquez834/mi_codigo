@@ -9,19 +9,21 @@ async function obtenerLibros() {
 
     } catch (error) {
         console.error("Error al obtener los libros:", error);
-        document.getElementById("contenedor-libros").innerHTML = "<p> Error al cargar los libros.</p>";
+        document.getElementById("tabla").innerHTML = "<p> Error al cargar los libros.</p>";
     }
 }
 
 // Función para mostrar los libros en formato de tabla
 function mostrarLibros(libros) {
     let contenido = "";
+    
     libros.forEach(libro => {
         contenido += `<tr>`;
-        contenido += `<td>${libro.titulo}</td>`;
-        contenido += `<td>${libro.autor}</td>`; 
-        contenido += `<td>${libro.año}</td>`;
-        contenido += `<td>${libro.genero}</td>`; 
+        contenido += `<td>${libro.id_libro}</td>`;
+        contenido += `<td>${libro.titulo}</td>`; 
+        contenido += `<td>${libro.autor}</td>`;
+        contenido += `<td>${libro.año_publicacion}</td>`; 
+        contenido += `<td>${libro.disponible ? "Sí" : "No"}</td>`;
         contenido += `</tr>`;
     });
     return contenido;
