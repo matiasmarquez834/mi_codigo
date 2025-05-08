@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../biblioteca"
+		},
+		{
+			"name": "mi_codigo",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
