@@ -24,6 +24,7 @@ function mostrarPrestamos(prestamos) {
         contenido += `<td>${prestamo.id_usuario}</td>`;
         contenido += `<td>${prestamo.fecha_prestamos}</td>`; 
         contenido += `<td>${prestamo.fecha_devolucion}</td>`;
+        contenido += `<td> <button>Eliminar</button> </td>`;
         contenido += `</tr>`;
     });
 

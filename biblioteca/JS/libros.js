@@ -23,6 +23,7 @@ function mostrarLibros(libros) {
         contenido += `<td>${libro.autor}</td>`;
         contenido += `<td>${libro.año_publicacion}</td>`; 
         contenido += `<td>${libro.disponible ? "Sí" : "No"}</td>`;
+        contenido += `<td> <button>Eliminar</button> </td>`;
         contenido += `</tr>`;
     });
     return contenido;

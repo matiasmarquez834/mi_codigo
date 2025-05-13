@@ -23,6 +23,7 @@ function mostrarUsuarios(usuarios) {
         contenido += `<td>${usuario.nombre}</td>`;
         contenido += `<td>${usuario.email}</td>`;
         contenido += `<td>${usuario.telefono}</td>`; 
+        contenido += `<td> <button>Eliminar</button> </td>`;
         contenido += `</tr>`;
     });
     return contenido;
