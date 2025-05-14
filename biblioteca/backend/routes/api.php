@@ -7,9 +7,9 @@ error_reporting(E_ALL);
 //trata de integrar este para los 3.
 // ?? header('Content-Type: application/json; charset=utf-8');
 
-require "../controllers/libros.php";       // Controlador de libros
-require "../controllers/prestamos.php";   // Controlador de préstamos
-require "../controllers/usuarios.php";     // Controlador de usuarios
+require_once "../controllers/libros.php";       // Controlador de libros
+require_once "../controllers/prestamos.php";   // Controlador de préstamos
+require_once "../controllers/usuarios.php";     // Controlador de usuarios
 
 // Obtener método HTTP y sección
 $requestMethod = $_SERVER["REQUEST_METHOD"];

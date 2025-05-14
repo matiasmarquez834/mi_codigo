@@ -32,6 +32,7 @@ function mostrarLibros(libros) {
 // Llamamos a obtenerLibros cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", function () {
     obtenerLibros(); // Esto hace la llamada a la API para obtener los libros
+    mostrarLibros(); // Esto muestra los libros en la tabla
 });
 
 // Función para eliminar un libro
@@ -40,16 +41,14 @@ async function eliminarLibro(id) {
     try {
         const respuesta = await fetch(`../backend/routes/api.php?seccion=libros&id=${id}`, {
             method: 'DELETE'
-
-            
         });
 
-        const texto = await respuesta.text();
+        const texto = await respuesta.text(); 
         console.log("Respuesta del servidor:", texto);
-        
+
         if (respuesta.ok) {
             alert("Libro eliminado correctamente");
-            obtenerLibros(); // Actualizar la lista de libros
+            obtenerLibros(); 
         } else {
             alert("Error al eliminar el libro");
         }
