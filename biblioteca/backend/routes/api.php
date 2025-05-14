@@ -1,4 +1,9 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 //trata de integrar este para los 3.
 // ?? header('Content-Type: application/json; charset=utf-8');
 
@@ -12,24 +17,32 @@ $seccion      = $_GET['seccion'] ?? '';
 
 switch ($seccion) {
     case 'libros':
-        // Si la solicitud es de tipo GET, se llama a la función obtenerLibros()
         if ($requestMethod === 'GET') {
             obtenerLibros();
-        // Si la solicitud es de tipo POST, se procesa la entrada y se agrega un libro
+    
         } elseif ($requestMethod === 'POST') {
-            // Leer los datos enviados en el cuerpo de la solicitud (formato JSON)
             $data = json_decode(file_get_contents('php://input'), true);
-            // Llamar a la función agregarLibro() pasando los valores extraídos del JSON
             agregarLibro(
                 $data['titulo'] ?? '',
                 $data['autor'] ?? '',
                 $data['anio_publicacion'] ?? ''
             );
-        // Si se usa otro método HTTP no permitido, se devuelve un mensaje de error en formato JSON    
+    
+        } elseif ($requestMethod === 'DELETE') {
+            $id = $_GET['id'] ?? null;
+    
+            if ($id) {
+                echo("Eliminando libro con ID: $id"); // <- Confirmar ID recibido
+                eliminarLibro($id); 
+            } else {
+                echo json_encode(['error' => 'ID de libro no proporcionado']);
+            }
+    
         } else {
             echo json_encode(['error' => 'Método no permitido para la sección libros']);
         }
         break;
+    
 
     case 'prestamos':
         // Si la solicitud es de tipo GET, se llama a la función obtenerPrestamos()
@@ -47,6 +60,15 @@ switch ($seccion) {
                 $data['fecha_devolucion'] ?? ''
             );
         // Si se usa otro método HTTP no permitido, se devuelve un mensaje de error en formato JSON    
+        } elseif ($requestMethod === 'DELETE') {
+            $id = $_GET['id'] ?? null;
+    
+            if ($id) {
+                eliminarLibro($id); 
+            } else {
+                echo json_encode(['error' => 'ID de libro no proporcionado']);
+            }
+    
         } else {
             echo json_encode(['error' => 'Método no permitido para la sección préstamos']);
         }
@@ -67,6 +89,15 @@ switch ($seccion) {
                 $data['rol'] ?? ''
             );
         // Si se usa otro método HTTP no permitido, se devuelve un mensaje de error en formato JSON
+        } elseif ($requestMethod === 'DELETE') {
+            $id = $_GET['id'] ?? null;
+    
+            if ($id) {
+                eliminarLibro($id); 
+            } else {
+                echo json_encode(['error' => 'ID de libro no proporcionado']);
+            }
+    
         } else {
             echo json_encode(['error' => 'Método no permitido para la sección usuarios']);
         }

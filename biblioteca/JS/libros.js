@@ -23,7 +23,7 @@ function mostrarLibros(libros) {
         contenido += `<td>${libro.autor}</td>`;
         contenido += `<td>${libro.año_publicacion}</td>`; 
         contenido += `<td>${libro.disponible ? "Sí" : "No"}</td>`;
-        contenido += `<td> <button>Eliminar</button> </td>`;
+        contenido += `<td><button onclick="eliminarLibro(${libro.id_libro})">Eliminar</button></td>`;
         contenido += `</tr>`;
     });
     return contenido;
@@ -33,3 +33,27 @@ function mostrarLibros(libros) {
 document.addEventListener("DOMContentLoaded", function () {
     obtenerLibros(); // Esto hace la llamada a la API para obtener los libros
 });
+
+// Función para eliminar un libro
+
+async function eliminarLibro(id) {
+    try {
+        const respuesta = await fetch(`../backend/routes/api.php?seccion=libros&id=${id}`, {
+            method: 'DELETE'
+
+            
+        });
+
+        const texto = await respuesta.text();
+        console.log("Respuesta del servidor:", texto);
+        
+        if (respuesta.ok) {
+            alert("Libro eliminado correctamente");
+            obtenerLibros(); // Actualizar la lista de libros
+        } else {
+            alert("Error al eliminar el libro");
+        }
+    } catch (error) {
+        console.error("Error al eliminar el libro:", error);
+    }
+}
