@@ -2,7 +2,6 @@
 require_once "../config/database.php";
 require_once "../models/Libro.php";
 
-$pdo = conectar(); // Conecta a la base de datos
 $libroModel = new Libro($pdo); // Instancia el modelo con PDO
 
 function obtenerLibros() {
