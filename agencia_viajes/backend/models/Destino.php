@@ -23,16 +23,17 @@ class Destino {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function agregar($destinoNombre, $descripcionDestino, $destinoPais, $destinoCiudad, $atracciones) {
-    $stmt = $this->pdo->prepare("INSERT INTO destino (nombre_destino, descripcion_destino, pais_destino, ciudad_destino, atracciones_principales)
-        VALUES (:nombre, :descripcion, :pais, :ciudad, :atracciones)");
+public function agregar($destinoNombre, $descripcionDestino, $destinoPais, $destinoCiudad, $atracciones, $imagenDestino) {
+    $stmt = $this->pdo->prepare("INSERT INTO destino (nombre_destino, descripcion_destino, pais_destino, ciudad_destino, atracciones_principales, imagen_destino)
+        VALUES (:nombre, :descripcion, :pais, :ciudad, :atracciones, :imagen)");
 
     return $stmt->execute([
         "nombre" => $destinoNombre,
         "descripcion" => $descripcionDestino,
         "pais" => $destinoPais,
         "ciudad" => $destinoCiudad,
-        "atracciones" => $atracciones
+        "atracciones" => $atracciones,
+        "imagen" => $imagenDestino
     ]);
 }
 
