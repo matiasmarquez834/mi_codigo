@@ -1,5 +1,5 @@
 <?php
-require "../controllers/destinos.php";
+require "../controllers/destinos.php"; // Importar la conexión a la base de datos
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $seccion = $_GET["seccion"] ?? null;

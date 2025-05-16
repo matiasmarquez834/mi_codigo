@@ -1,6 +1,6 @@
 async function obtenerDestinos() {
     try {
-        const respuesta = await fetch("../backend/api/api.php?seccion=destinos"); // Petición al servidor
+        const respuesta = await fetch('http://localhost/mi_codigo/agencia_viajes/backend/api/api.php?seccion=destinos'); // Petición al servidor
         const destinos = await respuesta.json(); // Convertir la respuesta a JSON
 
         const contenedorDestinos = document.getElementById("destinos");
@@ -16,7 +16,7 @@ async function obtenerDestinos() {
 function mostrarDestinos(destinos) {
     let contenido = "";
     destinos.forEach(destino => {
-        contenido += `<div class="card-container">`;
+        contenido += `<div class="card">`;
         contenido += `<img src="${destino.imagen_destino}" alt="Imagen 1">`;
         contenido += `<div class="card-content">`;
         contenido += `<h3 class="card-title">${destino.nombre_destino}</h3>`;
@@ -28,8 +28,4 @@ function mostrarDestinos(destinos) {
     return contenido;
 }
 
-// Llamamos a obtenerLibros cuando el DOM esté listo
-document.addEventListener("DOMContentLoaded", function () {
-    obtenerDestinos(); // Esto hace la llamada a la API para obtener los destinos
-    mostrarDestinos(); // Esto muestra los destinos en la tarjeta
-});
+obtenerDestinos(); // Llamar a la función para obtener los destinos al cargar la página

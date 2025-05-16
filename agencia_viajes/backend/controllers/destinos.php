@@ -1,7 +1,7 @@
 <?php
-require "../Models/destino.php"; // Importar el modelo
+require "../models/Destino.php"; // Importar el modelo
 
-$destinoModel = new destino($pdo); // Instancia del modelo
+$destinoModel = new Destino($pdo); // Instancia del modelo
 
 function obtenerDestino() {
     global $destinoModel;
