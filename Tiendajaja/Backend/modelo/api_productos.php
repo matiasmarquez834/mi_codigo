@@ -26,7 +26,7 @@ if ($requestMethod === "POST") {
             break;
 
         case "eliminarProducto":
-            $id = $_POST['id'] ?? null;
+            $id = $_POST['id_producto'] ?? null;
             if ($id) {
                 eliminarProducto($id);
             } else {
@@ -35,9 +35,9 @@ if ($requestMethod === "POST") {
             break;
 
         case "actualizarProducto":
-            $id = $_POST['id'] ?? null;
-            $nombre = $_POST['nombre'] ?? null;
-            $precio = $_POST['precio'] ?? null;
+            $id = $_POST['id_producto'] ?? null;
+            $nombre = $_POST['nombre_producto'] ?? null;
+            $precio = $_POST['precio_producto'] ?? null;
 
             if ($id && $nombre && $precio) {
                 actualizarProducto($id, $nombre, $precio);

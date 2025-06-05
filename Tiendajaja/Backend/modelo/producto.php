@@ -1,6 +1,6 @@
 <?php
 // Se importa el archivo que contiene la configuración de la base de datos, que establece la conexión
-require_once "../config/database.php"; 
+require_once "./database.php"; 
 
 // Definición de la clase 'producto' que interactúa con la tabla 'productos' en la base de datos
 class producto {
