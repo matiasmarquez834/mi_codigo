@@ -1,6 +1,6 @@
 <?php
 // Se importa el archivo que contiene la configuración de la base de datos, que establece la conexión
-require_once "./database.php"; 
+require "../config/conexion.php"; 
 
 // Definición de la clase 'producto' que interactúa con la tabla 'productos' en la base de datos
 class producto {
@@ -37,15 +37,16 @@ class producto {
     }
 
     // CREATE: Método para agregar un nuevo producto a la base de datos
-    public function agregar($ID_producto, $Nombre_producto, $Precio_producto) {
+    public function agregar($ID_producto, $Nombre_producto, $Descripcion_producto, $Precio_producto) {
         // Prepara la consulta de inserción con parámetros nombrados
-        $stmt = $this->pdo->prepare("INSERT INTO productos (id_producto, nombre_producto, precio_producto)
-            VALUES (:id, :nombre, :precio)");
+        $stmt = $this->pdo->prepare("INSERT INTO productos (id, nombre, descripcion, precio)
+            VALUES (:id, :nombre, :descripcion, :precio)");
 
         // Ejecuta la consulta pasando los valores en un array asociativo
         return $stmt->execute([
             "id" => $ID_producto,
             "nombre" => $Nombre_producto,
+            "descripcion" => $Descripcion_producto,
             "precio" => $Precio_producto
         ]);
     }

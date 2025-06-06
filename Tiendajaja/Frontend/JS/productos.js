@@ -1,8 +1,9 @@
 // URL base del endpoint
-const API_URL = "http://localhost/mi_codigo/Tiendajaja/Backend/modelo/api_productos.php"; // Cambia esta URL según corresponda
+const API_URL = "http://localhost/mi_codigo/Tiendajaja/Backend/routes/api_productos.php"; // Cambia esta URL según corresponda
 // Obtener todos los productos (GET)
 function listarProductos() {
-  fetch(API_URL)
+  const urlConSeccion2 = `${API_URL}?seccion=productos`;
+  fetch(urlConSeccion2) // Realiza la solicitud GET a la URL con la sección "productos"
     .then(res => res.json()) // Convierte la respuesta a JSON
     .then(data => {
       console.log("Productos:", data); // Muestra los productos en consola
@@ -36,11 +37,15 @@ function mostrarProducto(id) {
 }
 
 // Agregar un producto nuevo (POST)
-function agregarProducto(nombre, descripcion, precio) {
-  fetch(API_URL_2, {
+function agregarProducto(id, nombre, descripcion, precio) {
+  // Construir la URL con la sección "agregarProducto"
+  const urlConSeccion = `${API_URL}?seccion=agregarProducto`;
+
+  // Realizar la solicitud POST con los datos
+  fetch(urlConSeccion, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nombre, descripcion, precio })
+    body: JSON.stringify({ id, nombre, descripcion, precio })
   })
     .then(res => res.json()) // Convierte la respuesta a JSON
     .then(data => console.log("Producto agregado:", data)) // Muestra el resultado en consola

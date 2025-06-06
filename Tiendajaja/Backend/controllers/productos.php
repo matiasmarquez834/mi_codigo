@@ -1,5 +1,5 @@
 <?php
-require "../config/database.php"; // Conexión PDO
+require "../config/conexion.php"; // Conexión PDO
 require "../models/producto.php"; // Importar el modelo
 
 $productoModel = new producto($pdo); // Instancia del modelo
@@ -17,9 +17,9 @@ function obtenerProductoPorId($ID_producto) {
 }
 
 // Función para agregar un nuevo producto
-function agregarProducto($ID_producto, $Nombre_producto, $Precio_producto) {
+function agregarProducto($ID_producto, $Nombre_producto, $Descripcion_producto, $Precio_producto) {
     global $productoModel;
-    if ($productoModel->agregar($ID_producto, $Nombre_producto, $Precio_producto)) {
+    if ($productoModel->agregar($ID_producto, $Nombre_producto, $Descripcion_producto, $Precio_producto)) {
         echo json_encode(["message" => "Producto agregado"]);
     } else {
         echo json_encode(["error" => "Error al agregar el producto"]);

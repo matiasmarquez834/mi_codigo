@@ -12,14 +12,15 @@ header("Content-Type: application/json");
 
 if ($requestMethod === "POST") {
     switch ($seccion) {
-        case "añadirProducto":
+        case "agregarProducto":
             // Requiere id, nombre y precio por POST
             $id = $_POST['id'] ?? null;
             $nombre = $_POST['nombre'] ?? null;
+            $descripcion = $_POST['descripcion'] ?? null;
             $precio = $_POST['precio'] ?? null;
 
-            if ($id && $nombre && $precio) {
-                agregarProducto($id, $nombre, $precio);
+            if ($id && $nombre && $descripcion && $precio) {
+                agregarProducto($id, $nombre, $descripcion, $precio);
             } else {
                 echo json_encode(["error" => "Faltan datos para agregar el producto"]);
             }

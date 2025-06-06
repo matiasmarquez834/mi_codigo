@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Productos</title>
+    <script src="../JS/productos.js"></script>
 </head>
 
 <body>
     <h1>Gestión de Productos</h1>
 
-    <script src="../JS/productos.js"></script>
     <button onclick="listarProductos()">Listar Productos</button>
     <button onclick="mostrarProducto(1)">Mostrar Producto con ID 1</button>
     <button onclick="agregarProducto('Producto Demo', 'Descripción demo', 99.99)">Agregar Producto Demo</button>
@@ -21,24 +21,27 @@
 
     <form id="formAgregarProducto" onsubmit="event.preventDefault(); agregarProductoDesdeFormulario();">
         <h2>Agregar Producto</h2>
+        <label>ID: <input type="number" id="idProducto" required></label><br>
         <label>Nombre: <input type="text" id="nombreProducto" required></label><br>
         <label>Descripción: <input type="text" id="descripcionProducto" required></label><br>
         <label>Precio: <input type="number" id="precioProducto" step="0.01" required></label><br>
         <button type="submit" onsubmit="agregarProductoDesdeFormulario()">Agregar</button>
     </form>
 
-    <div id="productosContainer"></div>
+    <div id="productosContainer">
 
     <script>
         // Función para agregar producto desde el formulario
         function agregarProductoDesdeFormulario() {
+            let id = parseInt(document.getElementById('idProducto').value);
             let nombre = document.getElementById('nombreProducto').value;
             let descripcion = document.getElementById('descripcionProducto').value;
             let precio = parseFloat(document.getElementById('precioProducto').value);
-            agregarProducto(nombre, descripcion, precio);
+            agregarProducto(id, nombre, descripcion, precio);
         }
 
         listarProductos();
     </script>
+    </div>
 </body>
 </html>
