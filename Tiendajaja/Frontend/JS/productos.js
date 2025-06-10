@@ -50,6 +50,7 @@ function agregarProducto(nombre, descripcion, precio) {
     .then(res => res.json()) // Convierte la respuesta a JSON
     .then(data => console.log("Producto agregado:", data)) // Muestra el resultado en consola
     .catch(err => console.error("Error al agregar producto:", err));
+    listarProductos();
 }
 
 // Modificar un producto (PUT)
@@ -62,6 +63,7 @@ function modificarProducto(id, nombre, descripcion, precio) {
     .then(res => res.json()) // Convierte la respuesta a JSON
     .then(data => console.log("Producto modificado:", data)) // Muestra el resultado en consola
     .catch(err => console.error("Error al modificar producto:", err));
+    listarProductos();
 }
 
 // Eliminar un producto (DELETE)
@@ -72,6 +74,7 @@ function eliminarProducto(id) {
     .then(res => res.json()) // Convierte la respuesta a JSON
     .then(data => console.log("Producto eliminado:", data)) // Muestra el resultado en consola
     .catch(err => console.error("Error al eliminar producto:", err));
+    listarProductos();
 }
 
 // Ejemplos de uso

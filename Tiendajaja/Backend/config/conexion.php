@@ -13,4 +13,3 @@
         die("Error en la conexión: " . $e->getMessage());
     }
 ?>
-
