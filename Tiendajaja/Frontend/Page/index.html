@@ -21,7 +21,6 @@
 
     <form id="formAgregarProducto" onsubmit="event.preventDefault(); agregarProductoDesdeFormulario();">
         <h2>Agregar Producto</h2>
-        <label>ID: <input type="number" id="idProducto" required></label><br>
         <label>Nombre: <input type="text" id="nombreProducto" required></label><br>
         <label>Descripción: <input type="text" id="descripcionProducto" required></label><br>
         <label>Precio: <input type="number" id="precioProducto" step="0.01" required></label><br>
@@ -33,11 +32,10 @@
     <script>
         // Función para agregar producto desde el formulario
         function agregarProductoDesdeFormulario() {
-            let id = parseInt(document.getElementById('idProducto').value);
             let nombre = document.getElementById('nombreProducto').value;
             let descripcion = document.getElementById('descripcionProducto').value;
             let precio = parseFloat(document.getElementById('precioProducto').value);
-            agregarProducto(id, nombre, descripcion, precio);
+            agregarProducto(nombre, descripcion, precio);
         }
 
         listarProductos();
