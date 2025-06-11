@@ -20,9 +20,9 @@ function mostrarTablaProductos(productos) {
     return;
   }
   let html = '<table border="1" cellpadding="5"><thead><tr>';
-  html += '<th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th></tr></thead><tbody>';
+  html += '<th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Acciones</th></tr></thead><tbody>';
   productos.forEach(p => {
-    html += `<tr><td>${p.id}</td><td>${p.nombre}</td><td>${p.descripcion}</td><td>${p.precio}</td></tr>`;
+    html += `<tr><td>${p.id}</td><td>${p.nombre}</td><td>${p.descripcion}</td><td>${p.precio}</td><td><button onclick="eliminarProducto(${p.id})">Eliminar</button><button onclick="cargarProducto(${p.id}, '${p.nombre}', '${p.descripcion}', ${p.precio})">Modificar</button></td></tr>`;
   });
   html += '</tbody></table>';
   container.innerHTML = html;
@@ -30,11 +30,26 @@ function mostrarTablaProductos(productos) {
 
 // Obtener un producto por ID (GET)
 function mostrarProducto(id) {
-  fetch(`${API_URL}/id/${id}`)
+  const container = document.getElementById('productosContainer');
+  fetch(`${API_URL}?id=${id}`)
     .then(res => res.json()) // Convierte la respuesta a JSON
-    .then(data => console.log("Producto:", data)) // Muestra el producto en consola
-    .catch(err => console.error("Error al obtener producto:", err));
+    .then(data => {
+      if (data && !data.error) {
+        let html = '<table border="1" cellpadding="5"><thead><tr>';
+        html += '<th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th></tr></thead><tbody>';
+        html += `<tr><td>${data.id}</td><td>${data.nombre}</td><td>${data.descripcion}</td><td>${data.precio}</td><td><button onclick="eliminarProducto(${p.id})">Eliminar</button><button onclick="cargarProducto(${p.id}, '${p.nombre}', '${p.descripcion}', ${p.precio})">Modificar</button></td></tr>`;
+        html += '</tbody></table>';
+        container.innerHTML = html;
+      } else {
+        container.innerHTML = '<p>Producto no encontrado.</p>';
+      }
+    })
+    .catch(err => {
+      console.error("Error al obtener producto:", err);
+      container.innerHTML = '<p style="color:red;">Error al obtener el producto.</p>';
+    });
 }
+
 
 // Agregar un producto nuevo (POST)
 function agregarProducto(nombre, descripcion, precio) {
@@ -53,9 +68,17 @@ function agregarProducto(nombre, descripcion, precio) {
     listarProductos();
 }
 
+function cargarProducto (id,nombre,descripcion,precio) {
+  document.getElementById('idProducto').value = id;
+  document.getElementById('nombreProducto').value = nombre;
+  document.getElementById('descripcionProducto').value = descripcion;
+  document.getElementById('precioProducto').value = precio;
+}
+
 // Modificar un producto (PUT)
 function modificarProducto(id, nombre, descripcion, precio) {
-  fetch(API_URL, {
+  const urlConSeccion = `${API_URL}?id=${id}`;
+  fetch(urlConSeccion, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id, nombre, descripcion, precio })
@@ -68,18 +91,15 @@ function modificarProducto(id, nombre, descripcion, precio) {
 
 // Eliminar un producto (DELETE)
 function eliminarProducto(id) {
-  fetch(`${API_URL}/id/${id}`, {
+  const urlConSeccion = `${API_URL}?id=${id}`;
+
+  fetch(urlConSeccion, {
     method: "DELETE"
   })
-    .then(res => res.json()) // Convierte la respuesta a JSON
-    .then(data => console.log("Producto eliminado:", data)) // Muestra el resultado en consola
+    .then(res => res.json())
+    .then(data => {
+      console.log("Producto eliminado:", data);
+      listarProductos();
+    })
     .catch(err => console.error("Error al eliminar producto:", err));
-    listarProductos();
 }
-
-// Ejemplos de uso
-// listarProductos();
-// mostrarProducto(1);
-// agregarProducto("Producto X", "Descripción X", 99.99);
-// modificarProducto(1, "Nuevo nombre", "Nueva descripción", 123.45);
-// eliminarProducto(1);

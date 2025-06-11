@@ -1,5 +1,5 @@
 <?php
-require "../config/conexion.php"; // Importar la conexión a la base de datos
+$pdo = require "../config/conexion.php"; // Importar la conexión a la base de datos
 
 // Definición de la clase Producto que interactuará con la tabla 'productos' en la base de datos
 class Producto {
@@ -33,7 +33,7 @@ class Producto {
     // Método para modificar un producto existente
     public function modificar($id, $nombre, $descripcion, $precio) {
         $stmt = $this->pdo->prepare("UPDATE productos SET nombre=?, descripcion=?, precio=? WHERE id=?");
-        return $stmt->execute([$nombre, $descripcion, $precio, $id]);
+        return $stmt->execute([ $id,$nombre, $descripcion, $precio]);
     }
 
     // Método para eliminar un producto
